@@ -22,7 +22,7 @@ type server struct {
 type db struct {
 	Dialect  string `yaml:"dialect"`
 	Host     string `yaml:"host"`
-	Port     string `yaml:"port"`
+	Port     int    `yaml:"port"`
 	Db       string `yaml:"db"`
 	Username string `yaml:"username"`
 	Password string `yaml:"password"`
@@ -32,12 +32,12 @@ type db struct {
 }
 
 type redis struct {
-	address  string `yaml:"address"`
-	password string `yaml:"password"`
+	Address  string `yaml:"address"`
+	Password string `yaml:"password"`
 }
 
 type imgSetting struct {
-	uploadDir string `yaml:"uploadDir"`
+	UploadDir string `yaml:"uploadDir"`
 	ImgHost   string `yaml:"imgHost"`
 }
 
