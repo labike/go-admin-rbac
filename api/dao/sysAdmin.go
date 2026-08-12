@@ -5,7 +5,7 @@ import (
 	. "go-admin/pkg/db"
 )
 
-// 用户数据层
+// 用户数据层, 只管数据存取，不含业务判断
 
 func SysAdminDetail(dto entity.LoginDto) (sysAdmin entity.SysAdmin) {
 	username := dto.Username

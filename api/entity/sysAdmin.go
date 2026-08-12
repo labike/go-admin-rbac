@@ -21,7 +21,7 @@ func (SysAdmin) TableName() string {
 	return "sys_admin"
 }
 
-// 鉴权用户结构体
+// 鉴权用户结构体, 作为jwt的payload
 type JwtAdmin struct {
 	ID       uint   `json:"id"`
 	Username string `json:"username"`
@@ -32,6 +32,7 @@ type JwtAdmin struct {
 	Note     string `json:"note"`
 }
 
+// 登录请求体
 type LoginDto struct {
 	Username string `json:"username" validate:"required"`
 	Password string `json:"password" validate:"required"`

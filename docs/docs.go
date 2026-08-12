@@ -32,6 +32,163 @@ const docTemplate = `{
                 }
             }
         },
+        "/api/dept/create": {
+            "post": {
+                "description": "创建部门",
+                "produces": [
+                    "application/json"
+                ],
+                "summary": "创建部门",
+                "parameters": [
+                    {
+                        "description": "data",
+                        "name": "data",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/entity.CreateSysDeptDto"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/result.Result"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/dept/delete": {
+            "delete": {
+                "description": "删除部门",
+                "produces": [
+                    "application/json"
+                ],
+                "summary": "删除部门",
+                "parameters": [
+                    {
+                        "description": "data",
+                        "name": "data",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/entity.SysDeptIdDto"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/result.Result"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/dept/info": {
+            "get": {
+                "description": "根据部门id查询",
+                "produces": [
+                    "application/json"
+                ],
+                "summary": "根据部门id查询",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "部门id",
+                        "name": "id",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/result.Result"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/dept/list": {
+            "get": {
+                "description": "获取部门列表",
+                "produces": [
+                    "application/json"
+                ],
+                "summary": "获取部门列表",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "部门名称",
+                        "name": "deptName",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "部门状态",
+                        "name": "deptStatus",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/result.Result"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/dept/update": {
+            "put": {
+                "description": "编辑部门",
+                "produces": [
+                    "application/json"
+                ],
+                "summary": "编辑部门",
+                "parameters": [
+                    {
+                        "description": "data",
+                        "name": "data",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/entity.SysDept"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/result.Result"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/dept/vo/list": {
+            "get": {
+                "description": "部门下拉列表",
+                "produces": [
+                    "application/json"
+                ],
+                "summary": "部门下拉列表",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/result.Result"
+                        }
+                    }
+                }
+            }
+        },
         "/api/login": {
             "post": {
                 "description": "登录",
@@ -59,9 +216,274 @@ const docTemplate = `{
                     }
                 }
             }
+        },
+        "/api/post/batch/delete": {
+            "delete": {
+                "description": "批量删除岗位接口",
+                "produces": [
+                    "application/json"
+                ],
+                "summary": "批量删除岗位接口",
+                "parameters": [
+                    {
+                        "description": "data",
+                        "name": "data",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/entity.DelSysPostDto"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/result.Result"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/post/create": {
+            "post": {
+                "description": "新增岗位接口",
+                "produces": [
+                    "application/json"
+                ],
+                "summary": "新增岗位接口",
+                "parameters": [
+                    {
+                        "description": "data",
+                        "name": "data",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/entity.SysPost"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/result.Result"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/post/delete": {
+            "delete": {
+                "description": "删除岗位接口",
+                "produces": [
+                    "application/json"
+                ],
+                "summary": "删除岗位接口",
+                "parameters": [
+                    {
+                        "description": "data",
+                        "name": "data",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/entity.SysPostIdDto"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/result.Result"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/post/info": {
+            "get": {
+                "description": "根据id查询岗位",
+                "produces": [
+                    "application/json"
+                ],
+                "summary": "根据id查询岗位",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "岗位id",
+                        "name": "id",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/result.Result"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/post/list": {
+            "get": {
+                "description": "分页获取岗位列表",
+                "produces": [
+                    "application/json"
+                ],
+                "summary": "分页获取岗位列表",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "页码",
+                        "name": "pageNum",
+                        "in": "query"
+                    },
+                    {
+                        "type": "integer",
+                        "description": "每页数量",
+                        "name": "pageSize",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "岗位名称",
+                        "name": "postName",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "岗位状态:1-\u003e正常,2-\u003e禁用",
+                        "name": "postStatus",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "开始时间",
+                        "name": "beginTime",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "结束时间",
+                        "name": "endTime",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/result.Result"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/post/update": {
+            "put": {
+                "description": "编辑岗位接口",
+                "produces": [
+                    "application/json"
+                ],
+                "summary": "编辑岗位接口",
+                "parameters": [
+                    {
+                        "description": "data",
+                        "name": "data",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/entity.SysPost"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/result.Result"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/post/updateStatus": {
+            "put": {
+                "description": "编辑岗位状态",
+                "produces": [
+                    "application/json"
+                ],
+                "summary": "编辑岗位状态",
+                "parameters": [
+                    {
+                        "description": "data",
+                        "name": "data",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/entity.UpdateSysPostStatusDto"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/result.Result"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/post/vo/list": {
+            "get": {
+                "description": "岗位下拉列表",
+                "produces": [
+                    "application/json"
+                ],
+                "summary": "岗位下拉列表",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/result.Result"
+                        }
+                    }
+                }
+            }
         }
     },
     "definitions": {
+        "entity.CreateSysDeptDto": {
+            "type": "object",
+            "properties": {
+                "deptName": {
+                    "type": "string"
+                },
+                "deptStatus": {
+                    "type": "integer"
+                },
+                "deptType": {
+                    "type": "integer"
+                },
+                "parentId": {
+                    "type": "integer"
+                }
+            }
+        },
+        "entity.DelSysPostDto": {
+            "type": "object",
+            "properties": {
+                "ids": {
+                    "type": "array",
+                    "items": {
+                        "type": "integer"
+                    }
+                }
+            }
+        },
         "entity.LoginDto": {
             "type": "object",
             "required": [
@@ -88,6 +510,85 @@ const docTemplate = `{
                 }
             }
         },
+        "entity.SysDept": {
+            "type": "object",
+            "properties": {
+                "children": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/entity.SysDept"
+                    }
+                },
+                "createTime": {
+                    "$ref": "#/definitions/util.HTime"
+                },
+                "deptName": {
+                    "type": "string"
+                },
+                "deptStatus": {
+                    "type": "integer"
+                },
+                "deptType": {
+                    "type": "integer"
+                },
+                "id": {
+                    "type": "integer"
+                },
+                "parentId": {
+                    "type": "integer"
+                }
+            }
+        },
+        "entity.SysDeptIdDto": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "integer"
+                }
+            }
+        },
+        "entity.SysPost": {
+            "type": "object",
+            "properties": {
+                "createTime": {
+                    "$ref": "#/definitions/util.HTime"
+                },
+                "id": {
+                    "type": "integer"
+                },
+                "postCode": {
+                    "type": "string"
+                },
+                "postName": {
+                    "type": "string"
+                },
+                "postStatus": {
+                    "type": "integer"
+                },
+                "remark": {
+                    "type": "string"
+                }
+            }
+        },
+        "entity.SysPostIdDto": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "integer"
+                }
+            }
+        },
+        "entity.UpdateSysPostStatusDto": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "integer"
+                },
+                "postStatus": {
+                    "type": "integer"
+                }
+            }
+        },
         "result.Result": {
             "type": "object",
             "properties": {
@@ -96,6 +597,14 @@ const docTemplate = `{
                 },
                 "data": {},
                 "message": {
+                    "type": "string"
+                }
+            }
+        },
+        "util.HTime": {
+            "type": "object",
+            "properties": {
+                "time.Time": {
                     "type": "string"
                 }
             }

@@ -12,6 +12,9 @@ type Codes struct {
 	CAPTCHANOTTRUE             uint
 	PASSWORDNOTRUE             uint
 	STATUSISENABLE             uint
+	POSTEXISTS                 uint
+	DEPTEXISTS                 uint
+	DEPTDISABLED               uint
 }
 
 var ApiCode = &Codes{
@@ -25,6 +28,9 @@ var ApiCode = &Codes{
 	CAPTCHANOTTRUE:             409,
 	PASSWORDNOTRUE:             410,
 	STATUSISENABLE:             411,
+	POSTEXISTS:                 412,
+	DEPTEXISTS:                 413,
+	DEPTDISABLED:               414,
 }
 
 func init() {
@@ -39,6 +45,9 @@ func init() {
 		ApiCode.CAPTCHANOTTRUE:             "验证码错误",
 		ApiCode.PASSWORDNOTRUE:             "密码错误",
 		ApiCode.STATUSISENABLE:             "该用户已被禁用",
+		ApiCode.POSTEXISTS:                 "岗位已存在",
+		ApiCode.DEPTEXISTS:                 "部门已存在",
+		ApiCode.DEPTDISABLED:               "该部门无法删除",
 	}
 }
 

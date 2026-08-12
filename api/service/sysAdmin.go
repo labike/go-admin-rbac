@@ -11,10 +11,12 @@ import (
 	"github.com/go-playground/validator/v10"
 )
 
+// 接口只声明方法签名，不关心具体实现
 type ISysAdminService interface {
 	Login(c *gin.Context, dto entity.LoginDto)
 }
 
+// 怎么做
 type SysAdminServiceImpl struct{}
 
 // 登录
@@ -52,8 +54,10 @@ func (s SysAdminServiceImpl) Login(c *gin.Context, dto entity.LoginDto) {
 	})
 }
 
+// 单例对象，接口的实现实例
 var sysAdminService = SysAdminServiceImpl{}
 
+// 单例的获取入口
 func SysAdminService() ISysAdminService {
 	return &sysAdminService
 }
