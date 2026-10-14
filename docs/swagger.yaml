@@ -1,4 +1,37 @@
 definitions:
+  entity.AddSysAdminDto:
+    properties:
+      deptId:
+        type: integer
+      email:
+        type: string
+      nickname:
+        type: string
+      note:
+        type: string
+      password:
+        type: string
+      phone:
+        type: string
+      postId:
+        type: integer
+      roleId:
+        type: integer
+      status:
+        type: integer
+      username:
+        type: string
+    required:
+    - deptId
+    - email
+    - nickname
+    - password
+    - phone
+    - postId
+    - roleId
+    - status
+    - username
+    type: object
   entity.CreateSysDeptDto:
     properties:
       deptName:
@@ -36,6 +69,30 @@ definitions:
     - password
     - username
     type: object
+  entity.ResetSysAdminPasswordDto:
+    properties:
+      id:
+        type: integer
+      password:
+        type: string
+    type: object
+  entity.RoleMenu:
+    properties:
+      id:
+        type: integer
+      menuIds:
+        items:
+          type: integer
+        type: array
+    required:
+    - id
+    - menuIds
+    type: object
+  entity.SysAdminIdDto:
+    properties:
+      id:
+        type: integer
+    type: object
   entity.SysDept:
     properties:
       children:
@@ -60,6 +117,38 @@ definitions:
       id:
         type: integer
     type: object
+  entity.SysMenu:
+    properties:
+      children:
+        items:
+          $ref: '#/definitions/entity.SysMenu'
+        type: array
+      createTime:
+        $ref: '#/definitions/util.HTime'
+      icon:
+        type: string
+      id:
+        type: integer
+      menuName:
+        type: string
+      menuStatus:
+        type: integer
+      menuType:
+        type: integer
+      parentId:
+        type: integer
+      sort:
+        type: integer
+      url:
+        type: string
+      value:
+        type: string
+    type: object
+  entity.SysMenuIdDto:
+    properties:
+      id:
+        type: integer
+    type: object
   entity.SysPost:
     properties:
       createTime:
@@ -80,12 +169,122 @@ definitions:
       id:
         type: integer
     type: object
+  entity.SysRole:
+    properties:
+      createTime:
+        $ref: '#/definitions/util.HTime'
+      description:
+        type: string
+      id:
+        type: integer
+      roleKey:
+        type: string
+      roleName:
+        type: string
+      status:
+        type: integer
+    type: object
+  entity.SysRoleDto:
+    properties:
+      id:
+        type: integer
+    type: object
+  entity.UpdatePersonPwdDto:
+    properties:
+      id:
+        type: integer
+      newPassword:
+        type: string
+      password:
+        type: string
+      resetPassword:
+        type: string
+    required:
+    - newPassword
+    - password
+    - resetPassword
+    type: object
+  entity.UpdateSysAdminDto:
+    properties:
+      deptId:
+        type: integer
+      email:
+        type: string
+      id:
+        type: integer
+      nickname:
+        type: string
+      note:
+        type: string
+      phone:
+        type: string
+      postId:
+        type: integer
+      roleId:
+        type: integer
+      status:
+        type: integer
+      username:
+        type: string
+    type: object
+  entity.UpdateSysAdminStatusDto:
+    properties:
+      id:
+        type: integer
+      status:
+        type: integer
+    type: object
   entity.UpdateSysPostStatusDto:
     properties:
       id:
         type: integer
       postStatus:
         type: integer
+    type: object
+  entity.UpdateSysRole:
+    properties:
+      description:
+        type: string
+      id:
+        type: integer
+      roleKey:
+        type: string
+      roleName:
+        type: string
+      status:
+        type: integer
+    type: object
+  entity.UpdateSysRoleStatus:
+    properties:
+      id:
+        type: integer
+      status:
+        description: 1启用 2禁用
+        type: integer
+    type: object
+  entity.UpdateUserDto:
+    properties:
+      email:
+        type: string
+      icon:
+        type: string
+      id:
+        type: integer
+      nickname:
+        type: string
+      note:
+        type: string
+      phone:
+        type: string
+      username:
+        type: string
+    required:
+    - email
+    - icon
+    - nickname
+    - note
+    - phone
+    - username
     type: object
   result.Result:
     properties:
@@ -106,6 +305,149 @@ info:
   title: 通用后台管理系统
   version: "1.0"
 paths:
+  /api/admin/create:
+    post:
+      description: 新增用户
+      parameters:
+      - description: data
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/entity.AddSysAdminDto'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/result.Result'
+      summary: 新增用户
+  /api/admin/delete:
+    delete:
+      description: 根据用户id删除用户
+      parameters:
+      - description: data
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/entity.SysAdminIdDto'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/result.Result'
+      summary: 根据用户id删除用户
+  /api/admin/edit:
+    put:
+      description: 编辑用户
+      parameters:
+      - description: data
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/entity.UpdateSysAdminDto'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/result.Result'
+      summary: 编辑用户
+  /api/admin/info:
+    get:
+      description: 根据id查询用户
+      parameters:
+      - description: Id
+        in: query
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/result.Result'
+      summary: 根据id查询用户
+  /api/admin/list:
+    get:
+      description: 分页获取用户列表
+      parameters:
+      - description: 页码
+        in: query
+        name: pageNum
+        type: integer
+      - description: 每页数量
+        in: query
+        name: pageSize
+        type: integer
+      - description: 用户名称
+        in: query
+        name: userName
+        type: string
+      - description: 状态:1->正常,2->禁用
+        in: query
+        name: status
+        type: string
+      - description: 开始时间
+        in: query
+        name: beginTime
+        type: string
+      - description: 结束时间
+        in: query
+        name: endTime
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/result.Result'
+      summary: 分页获取用户列表
+  /api/admin/reset/password:
+    post:
+      description: 修改用户密码
+      parameters:
+      - description: data
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/entity.ResetSysAdminPasswordDto'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/result.Result'
+      summary: 修改用户密码
+  /api/admin/status:
+    put:
+      description: 编辑用户状态
+      parameters:
+      - description: data
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/entity.UpdateSysAdminStatusDto'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/result.Result'
+      summary: 编辑用户状态
   /api/captcha:
     get:
       description: 验证码接口
@@ -236,6 +578,108 @@ paths:
           schema:
             $ref: '#/definitions/result.Result'
       summary: 登录
+  /api/menu/create:
+    post:
+      description: 创建菜单
+      parameters:
+      - description: data
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/entity.SysMenu'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/result.Result'
+      summary: 创建菜单
+  /api/menu/delete:
+    delete:
+      description: 删除菜单
+      parameters:
+      - description: data
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/entity.SysMenuIdDto'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/result.Result'
+      summary: 删除菜单
+  /api/menu/info:
+    get:
+      description: 根据菜单id查询菜单信息
+      parameters:
+      - description: id
+        in: query
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/result.Result'
+      summary: 根据菜单id查询菜单信息
+  /api/menu/list:
+    get:
+      description: 查询菜单
+      parameters:
+      - description: 菜单名称
+        in: query
+        name: menuName
+        type: string
+      - description: 菜单状态
+        in: query
+        name: menuStatus
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/result.Result'
+      summary: 查询菜单
+  /api/menu/update:
+    put:
+      description: 编辑菜单
+      parameters:
+      - description: data
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/entity.SysMenu'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/result.Result'
+      summary: 编辑菜单
+  /api/menu/vo/list:
+    get:
+      description: 获取菜单下拉列表
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/result.Result'
+      summary: 获取菜单下拉列表
   /api/post/batch/delete:
     delete:
       description: 批量删除岗位接口
@@ -389,6 +833,215 @@ paths:
           schema:
             $ref: '#/definitions/result.Result'
       summary: 岗位下拉列表
+  /api/role/assignPermissions:
+    put:
+      description: 分配权限
+      parameters:
+      - description: data
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/entity.RoleMenu'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/result.Result'
+      summary: 分配权限
+  /api/role/create:
+    post:
+      description: 创建角色
+      parameters:
+      - description: data
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/entity.SysRole'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/result.Result'
+      summary: 创建角色
+  /api/role/delete:
+    delete:
+      description: 删除角色
+      parameters:
+      - description: data
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/entity.SysRoleDto'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/result.Result'
+      summary: 删除角色
+  /api/role/edit:
+    put:
+      description: 编辑角色
+      parameters:
+      - description: data
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/entity.UpdateSysRole'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/result.Result'
+      summary: 编辑角色
+  /api/role/info:
+    get:
+      description: 获取角色分页数据
+      parameters:
+      - description: 页码
+        in: query
+        name: pageNum
+        type: integer
+      - description: 每页数量
+        in: query
+        name: pageSize
+        type: integer
+      - description: 角色名称
+        in: query
+        name: roleName
+        type: string
+      - description: 角色状态
+        in: query
+        name: status
+        type: string
+      - description: 开始时间
+        in: query
+        name: beginTime
+        type: string
+      - description: 结束时间
+        in: query
+        name: endTime
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/result.Result'
+      summary: 获取角色分页数据
+  /api/role/update:
+    put:
+      description: 编辑角色状态
+      parameters:
+      - description: data
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/entity.UpdateSysRoleStatus'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/result.Result'
+      summary: 编辑角色状态
+  /api/role/vo/idList:
+    get:
+      description: 根据角色id获取菜单权限数据
+      parameters:
+      - description: 角色id
+        in: query
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/result.Result'
+      summary: 根据角色id获取菜单权限数据
+  /api/role/vo/list:
+    get:
+      description: 获取角色下拉列表数据
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/result.Result'
+      summary: 获取角色下拉列表数据
+  /api/upload:
+    post:
+      consumes:
+      - multipart/form-data
+      description: 上传
+      parameters:
+      - description: file
+        in: formData
+        name: file
+        required: true
+        type: file
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/result.Result'
+      summary: 上传
+  /api/user/update:
+    put:
+      description: 编辑用户
+      parameters:
+      - description: data
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/entity.UpdateUserDto'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/result.Result'
+      summary: 编辑用户
+  /api/user/update/password:
+    put:
+      description: 更新当前用户密码
+      parameters:
+      - description: data
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/entity.UpdatePersonPwdDto'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/result.Result'
+      summary: 更新当前用户密码
 securityDefinitions:
   ApiKeyAuth:
     in: header

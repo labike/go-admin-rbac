@@ -39,3 +39,94 @@ type LoginDto struct {
 	Image    string `json:"image" validate:"required,min=4,max=6"` // 验证码
 	IdKey    string `json:"idKey" validate:"required"`
 }
+
+type AddSysAdminDto struct {
+	PostId   int    `validate:"required"`
+	RoleId   uint   `validate:"required"`
+	DeptId   int    `validate:"required"`
+	Username string `validate:"required"`
+	Password string `validate:"required"`
+	Nickname string `validate:"required"`
+	Phone    string `validate:"required"`
+	Email    string `validate:"required"`
+	Note     string
+	Status   int `validate:"required"`
+}
+
+type SysAdminInfo struct {
+	ID       uint   `json:"id"`
+	Username string `json:"username"`
+	Nickname string `json:"nickname"`
+	Status   int    `json:"status"`
+	PostId   int    `json:"postId"`
+	DeptId   int    `json:"deptId"`
+	RoleId   int    `json:"roleId"`
+	Email    string `json:"email"`
+	Phone    string `json:"phone"`
+	Note     string `json:"note"`
+}
+
+type UpdateSysAdminDto struct {
+	Id       uint
+	Username string
+	Nickname string
+	Status   int
+	PostId   int
+	DeptId   int
+	RoleId   uint
+	Email    string
+	Phone    string
+	Note     string
+}
+
+type SysAdminIdDto struct {
+	Id uint `json:"id"`
+}
+
+type UpdateSysAdminStatusDto struct {
+	Id     uint
+	Status int
+}
+
+type ResetSysAdminPasswordDto struct {
+	Id       uint
+	Password string
+}
+type UpdateUserDto struct {
+	Id       uint
+	Icon     string `validate:"required"`
+	Username string `validate:"required"`
+	Nickname string `validate:"required"`
+	Phone    string `validate:"required"`
+	Email    string `validate:"required"`
+	Note     string `validate:"required"`
+}
+
+type UpdateUserPwdDto struct {
+	Id       uint
+	Password string
+}
+
+type UpdatePersonPwdDto struct {
+	Id            uint
+	Password      string `validate:"required"`
+	NewPassword   string `validate:"required"`
+	ResetPassword string `validate:"required"`
+}
+
+type SysAdminVo struct {
+	ID         uint       `json:"id"`
+	Username   string     `json:"username"`
+	Nickname   string     `json:"nickname"`
+	Status     int        `json:"status"`
+	PostId     int        `json:"postId"`
+	PostName   string     `json:"postName"`
+	DeptId     int        `json:"deptId"`
+	DeptName   string     `json:"deptName"`
+	RoleId     int        `json:"roleId"`
+	RoleName   string     `json:"roleName"`
+	Email      string     `json:"email"`
+	Phone      string     `json:"phone"`
+	Note       string     `json:"note"`
+	CreateTime util.HTime `json:"createTime"`
+}
