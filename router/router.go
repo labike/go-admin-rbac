@@ -66,5 +66,12 @@ func register(router *gin.Engine) {
 		jwt.POST("/upload", controller.Upload)
 		jwt.PUT("/user/update", controller.UpdateUser)
 		jwt.PUT("/user/update/password", controller.UpdatePersonPwd)
+		jwt.GET("/login/info", controller.GetLoginLog)
+		jwt.DELETE("/login/delete", controller.DeleteLoginLog)
+		jwt.DELETE("/login/batchDelete", controller.BatchDeleteLoginLog)
+		jwt.DELETE("/login/clear", controller.ClearLoginLog)
+		jwt.GET("/oper/list", controller.GetSysOperList)
+		jwt.DELETE("/operr/delete", controller.DeleteSysOperLogById)
+		jwt.DELETE("/oper/batchDelete", controller.BatchDeleteSysOperLog)
 	}
 }

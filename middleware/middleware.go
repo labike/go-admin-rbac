@@ -36,9 +36,3 @@ func AuthMiddleware() func(c *gin.Context) {
 		c.Next()
 	}
 }
-
-func LogMiddleware() func(c *gin.Context) {
-	return func(c *gin.Context) {
-		c.Next()
-	}
-}

@@ -17,6 +17,11 @@ const docTemplate = `{
     "paths": {
         "/api/admin/create": {
             "post": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
                 "description": "新增用户",
                 "produces": [
                     "application/json"
@@ -45,6 +50,11 @@ const docTemplate = `{
         },
         "/api/admin/delete": {
             "delete": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
                 "description": "根据用户id删除用户",
                 "produces": [
                     "application/json"
@@ -73,6 +83,11 @@ const docTemplate = `{
         },
         "/api/admin/edit": {
             "put": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
                 "description": "编辑用户",
                 "produces": [
                     "application/json"
@@ -101,6 +116,11 @@ const docTemplate = `{
         },
         "/api/admin/info": {
             "get": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
                 "description": "根据id查询用户",
                 "produces": [
                     "application/json"
@@ -127,6 +147,11 @@ const docTemplate = `{
         },
         "/api/admin/list": {
             "get": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
                 "description": "分页获取用户列表",
                 "produces": [
                     "application/json"
@@ -182,6 +207,11 @@ const docTemplate = `{
         },
         "/api/admin/reset/password": {
             "post": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
                 "description": "修改用户密码",
                 "produces": [
                     "application/json"
@@ -210,6 +240,11 @@ const docTemplate = `{
         },
         "/api/admin/status": {
             "put": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
                 "description": "编辑用户状态",
                 "produces": [
                     "application/json"
@@ -255,6 +290,11 @@ const docTemplate = `{
         },
         "/api/dept/create": {
             "post": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
                 "description": "创建部门",
                 "produces": [
                     "application/json"
@@ -283,6 +323,11 @@ const docTemplate = `{
         },
         "/api/dept/delete": {
             "delete": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
                 "description": "删除部门",
                 "produces": [
                     "application/json"
@@ -311,6 +356,11 @@ const docTemplate = `{
         },
         "/api/dept/info": {
             "get": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
                 "description": "根据部门id查询",
                 "produces": [
                     "application/json"
@@ -336,6 +386,11 @@ const docTemplate = `{
         },
         "/api/dept/list": {
             "get": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
                 "description": "获取部门列表",
                 "produces": [
                     "application/json"
@@ -367,6 +422,11 @@ const docTemplate = `{
         },
         "/api/dept/update": {
             "put": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
                 "description": "编辑部门",
                 "produces": [
                     "application/json"
@@ -395,6 +455,11 @@ const docTemplate = `{
         },
         "/api/dept/vo/list": {
             "get": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
                 "description": "部门下拉列表",
                 "produces": [
                     "application/json"
@@ -412,6 +477,11 @@ const docTemplate = `{
         },
         "/api/login": {
             "post": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
                 "description": "登录",
                 "produces": [
                     "application/json"
@@ -438,8 +508,161 @@ const docTemplate = `{
                 }
             }
         },
+        "/api/login/batchDelete": {
+            "delete": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "description": "根据id批量删除登录日志",
+                "produces": [
+                    "application/json"
+                ],
+                "summary": "根据id批量删除登录日志",
+                "parameters": [
+                    {
+                        "description": "data",
+                        "name": "data",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/entity.SysLoginIdDto"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/result.Result"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/login/clear": {
+            "delete": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "description": "清空登录日志",
+                "produces": [
+                    "application/json"
+                ],
+                "summary": "清空登录日志",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/result.Result"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/login/delete": {
+            "delete": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "description": "根据id删除登录日志",
+                "produces": [
+                    "application/json"
+                ],
+                "summary": "根据id删除登录日志",
+                "parameters": [
+                    {
+                        "description": "data",
+                        "name": "data",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/entity.SysLoginDto"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/result.Result"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/login/info": {
+            "get": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "description": "分页获取登录日志列表",
+                "produces": [
+                    "application/json"
+                ],
+                "summary": "分页获取登录日志列表",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "页码",
+                        "name": "pageNum",
+                        "in": "query"
+                    },
+                    {
+                        "type": "integer",
+                        "description": "每页数量",
+                        "name": "pageSize",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "用户名称",
+                        "name": "userName",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "状态:1-\u003e正常,2-\u003e禁用",
+                        "name": "loginStatus",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "开始时间",
+                        "name": "beginTime",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "结束时间",
+                        "name": "endTime",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/result.Result"
+                        }
+                    }
+                }
+            }
+        },
         "/api/menu/create": {
             "post": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
                 "description": "创建菜单",
                 "produces": [
                     "application/json"
@@ -468,6 +691,11 @@ const docTemplate = `{
         },
         "/api/menu/delete": {
             "delete": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
                 "description": "删除菜单",
                 "produces": [
                     "application/json"
@@ -496,6 +724,11 @@ const docTemplate = `{
         },
         "/api/menu/info": {
             "get": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
                 "description": "根据菜单id查询菜单信息",
                 "produces": [
                     "application/json"
@@ -522,6 +755,11 @@ const docTemplate = `{
         },
         "/api/menu/list": {
             "get": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
                 "description": "查询菜单",
                 "produces": [
                     "application/json"
@@ -553,6 +791,11 @@ const docTemplate = `{
         },
         "/api/menu/update": {
             "put": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
                 "description": "编辑菜单",
                 "produces": [
                     "application/json"
@@ -581,6 +824,11 @@ const docTemplate = `{
         },
         "/api/menu/vo/list": {
             "get": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
                 "description": "获取菜单下拉列表",
                 "produces": [
                     "application/json"
@@ -596,8 +844,133 @@ const docTemplate = `{
                 }
             }
         },
+        "/api/oper/batchDelete": {
+            "delete": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "description": "根据id批量删除操作日志",
+                "produces": [
+                    "application/json"
+                ],
+                "summary": "根据id批量删除操作日志",
+                "parameters": [
+                    {
+                        "description": "data",
+                        "name": "data",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/entity.SysOperateIdsDto"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/result.Result"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/oper/delete": {
+            "delete": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "description": "根据id删除操作日志",
+                "produces": [
+                    "application/json"
+                ],
+                "summary": "根据id删除操作日志",
+                "parameters": [
+                    {
+                        "description": "data",
+                        "name": "data",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/entity.SysOperateLogDto"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/result.Result"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/oper/list": {
+            "get": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "description": "分页获取操作日志列表",
+                "produces": [
+                    "application/json"
+                ],
+                "summary": "分页获取操作日志列表",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "页码",
+                        "name": "pageNum",
+                        "in": "query"
+                    },
+                    {
+                        "type": "integer",
+                        "description": "每页数量",
+                        "name": "pageSize",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "用户名称",
+                        "name": "userName",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "开始时间",
+                        "name": "beginTime",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "结束时间",
+                        "name": "endTime",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/result.Result"
+                        }
+                    }
+                }
+            }
+        },
         "/api/post/batch/delete": {
             "delete": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
                 "description": "批量删除岗位接口",
                 "produces": [
                     "application/json"
@@ -654,6 +1027,11 @@ const docTemplate = `{
         },
         "/api/post/delete": {
             "delete": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
                 "description": "删除岗位接口",
                 "produces": [
                     "application/json"
@@ -682,6 +1060,11 @@ const docTemplate = `{
         },
         "/api/post/info": {
             "get": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
                 "description": "根据id查询岗位",
                 "produces": [
                     "application/json"
@@ -707,6 +1090,11 @@ const docTemplate = `{
         },
         "/api/post/list": {
             "get": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
                 "description": "分页获取岗位列表",
                 "produces": [
                     "application/json"
@@ -762,6 +1150,11 @@ const docTemplate = `{
         },
         "/api/post/update": {
             "put": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
                 "description": "编辑岗位接口",
                 "produces": [
                     "application/json"
@@ -790,6 +1183,11 @@ const docTemplate = `{
         },
         "/api/post/updateStatus": {
             "put": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
                 "description": "编辑岗位状态",
                 "produces": [
                     "application/json"
@@ -818,6 +1216,11 @@ const docTemplate = `{
         },
         "/api/post/vo/list": {
             "get": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
                 "description": "岗位下拉列表",
                 "produces": [
                     "application/json"
@@ -835,6 +1238,11 @@ const docTemplate = `{
         },
         "/api/role/assignPermissions": {
             "put": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
                 "description": "分配权限",
                 "produces": [
                     "application/json"
@@ -863,6 +1271,11 @@ const docTemplate = `{
         },
         "/api/role/create": {
             "post": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
                 "description": "创建角色",
                 "produces": [
                     "application/json"
@@ -891,6 +1304,11 @@ const docTemplate = `{
         },
         "/api/role/delete": {
             "delete": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
                 "description": "删除角色",
                 "produces": [
                     "application/json"
@@ -919,6 +1337,11 @@ const docTemplate = `{
         },
         "/api/role/edit": {
             "put": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
                 "description": "编辑角色",
                 "produces": [
                     "application/json"
@@ -947,6 +1370,11 @@ const docTemplate = `{
         },
         "/api/role/info": {
             "get": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
                 "description": "获取角色分页数据",
                 "produces": [
                     "application/json"
@@ -1002,6 +1430,11 @@ const docTemplate = `{
         },
         "/api/role/update": {
             "put": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
                 "description": "编辑角色状态",
                 "produces": [
                     "application/json"
@@ -1030,6 +1463,11 @@ const docTemplate = `{
         },
         "/api/role/vo/idList": {
             "get": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
                 "description": "根据角色id获取菜单权限数据",
                 "produces": [
                     "application/json"
@@ -1056,6 +1494,11 @@ const docTemplate = `{
         },
         "/api/role/vo/list": {
             "get": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
                 "description": "获取角色下拉列表数据",
                 "produces": [
                     "application/json"
@@ -1073,6 +1516,11 @@ const docTemplate = `{
         },
         "/api/upload": {
             "post": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
                 "description": "上传",
                 "consumes": [
                     "multipart/form-data"
@@ -1102,6 +1550,11 @@ const docTemplate = `{
         },
         "/api/user/update": {
             "put": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
                 "description": "编辑用户",
                 "produces": [
                     "application/json"
@@ -1130,6 +1583,11 @@ const docTemplate = `{
         },
         "/api/user/update/password": {
             "put": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
                 "description": "更新当前用户密码",
                 "produces": [
                     "application/json"
@@ -1332,6 +1790,25 @@ const docTemplate = `{
                 }
             }
         },
+        "entity.SysLoginDto": {
+            "type": "object",
+            "properties": {
+                "ids": {
+                    "type": "array",
+                    "items": {
+                        "type": "integer"
+                    }
+                }
+            }
+        },
+        "entity.SysLoginIdDto": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "integer"
+                }
+            }
+        },
         "entity.SysMenu": {
             "type": "object",
             "properties": {
@@ -1374,6 +1851,25 @@ const docTemplate = `{
             }
         },
         "entity.SysMenuIdDto": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "integer"
+                }
+            }
+        },
+        "entity.SysOperateIdsDto": {
+            "type": "object",
+            "properties": {
+                "ids": {
+                    "type": "array",
+                    "items": {
+                        "type": "integer"
+                    }
+                }
+            }
+        },
+        "entity.SysOperateLogDto": {
             "type": "object",
             "properties": {
                 "id": {
